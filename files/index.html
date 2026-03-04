@@ -398,7 +398,7 @@ footer{text-align:center;padding:1.8rem 4rem;background:var(--footer-bg);color:r
       <div>
         <div class="badge"><span class="dot"></span>Available for new roles</div>
         <div class="clinks">
-          <a id="email-link" class="clink"><span class="cicon">✉️</span><span id="email-text"></span></a>
+          <a href="/cdn-cgi/l/email-protection#2751464b42554609404b42545467404a464e4b0944484a" class="clink"><span class="cicon">✉️</span><span class="__cf_email__" data-cfemail="8afcebe6eff8eba4ede6eff9f9caede7ebe3e6a4e9e5e7">[email&#160;protected]</span></a>
           <a href="tel:9497933888" class="clink"><span class="cicon">📱</span>(949) 793-3888</a>
           <a href="https://www.linkedin.com/in/glessvalera/" target="_blank" class="clink"><span class="cicon">💼</span>linkedin.com/in/glessvalera</a>
         </div>
@@ -418,32 +418,34 @@ footer{text-align:center;padding:1.8rem 4rem;background:var(--footer-bg);color:r
   }
 
   // ── DARK / LIGHT MODE TOGGLE ──
-  window.toggleTheme = function() {
+  function applyTheme(isDark) {
     const body = document.body;
     const btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
     const icon = btn.querySelector('.icon');
     const label = btn.querySelector('.label');
-    body.classList.toggle('dark');
-    if (body.classList.contains('dark')) {
+    if (isDark) {
+      body.classList.add('dark');
       icon.textContent = '☀️';
       label.textContent = 'Light';
-      localStorage.setItem('theme', 'dark');
     } else {
+      body.classList.remove('dark');
       icon.textContent = '🌙';
       label.textContent = 'Dark';
-      localStorage.setItem('theme', 'light');
     }
   }
 
+  window.toggleTheme = function() {
+    const isDark = document.body.classList.contains('dark');
+    applyTheme(!isDark);
+    localStorage.setItem('theme', !isDark ? 'dark' : 'light');
+  }
+
   // Restore saved theme on page load
-  (function() {
-    if (localStorage.getItem('theme') === 'dark') {
-      document.body.classList.add('dark');
-      const btn = document.querySelector('.theme-toggle');
-      btn.querySelector('.icon').textContent = '☀️';
-      btn.querySelector('.label').textContent = 'Light';
-    }
-  })();
+  document.addEventListener('DOMContentLoaded', function() {
+    const saved = localStorage.getItem('theme');
+    applyTheme(saved === 'dark');
+  });
 </script>
 </body>
 </html>
