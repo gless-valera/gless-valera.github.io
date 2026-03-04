@@ -7,14 +7,40 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--cream:#FAF8F4;--white:#fff;--ink:#1A1A1A;--muted:#6B6B6B;--accent:#C46B3C;--accent-light:#F4E8DF;--border:#E8E3DC;--tag:#EEE8E0}
+
+/* ── LIGHT MODE (default) ── */
+:root{
+  --cream:#FAF8F4;--white:#fff;--ink:#1A1A1A;--muted:#6B6B6B;
+  --accent:#C46B3C;--accent-light:#F4E8DF;--border:#E8E3DC;--tag:#EEE8E0;
+  --nav-bg:rgba(250,248,244,.92);--contact-bg:#1A1A1A;--contact-color:#FAF8F4;
+  --footer-bg:#111;
+}
+
+/* ── DARK MODE ── */
+body.dark{
+  --cream:#1C1C1E;--white:#2A2A2D;--ink:#F0EDE8;--muted:#A0A0A8;
+  --accent:#E07A45;--accent-light:#3A2418;--border:#3A3A3E;--tag:#2E2E32;
+  --nav-bg:rgba(28,28,30,.92);--contact-bg:#111113;--contact-color:#F0EDE8;
+  --footer-bg:#0A0A0C;
+}
+
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.25rem 4rem;background:rgba(250,248,244,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;transition:background .3s,color .3s}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.25rem 4rem;background:var(--nav-bg);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);transition:background .3s,border-color .3s}
 .nav-logo{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--ink);text-decoration:none}
+.nav-right{display:flex;align-items:center;gap:2.5rem}
 .nav-links{display:flex;gap:2.5rem;list-style:none}
 .nav-links a{text-decoration:none;color:var(--muted);font-size:.88rem;font-weight:500;transition:color .2s}
 .nav-links a:hover{color:var(--accent)}
+
+/* ── DARK MODE TOGGLE ── */
+.theme-toggle{background:none;border:2px solid var(--border);border-radius:100px;padding:.35rem .75rem;cursor:pointer;font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:.4rem;transition:all .2s;white-space:nowrap}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+.theme-toggle .icon{font-size:1rem}
+
+/* ── HERO ── */
 .hero{min-height:100vh;display:flex;align-items:center;padding:8rem 4rem 5rem;max-width:1100px;margin:0 auto;gap:4rem}
 .hero-text{flex:1}
 .eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:1.2rem}
@@ -32,22 +58,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .stat-n{font-family:'DM Serif Display',serif;font-size:1.8rem}
 .stat-l{font-size:.78rem;color:var(--muted)}
 .hero-cards{flex:0 0 300px;display:flex;flex-direction:column;gap:1rem}
-.card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.4rem 1.6rem}
+.card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.4rem 1.6rem;transition:background .3s,border-color .3s}
 .card-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem}
 .card-val{font-size:.92rem;font-weight:500}
 .pills{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.4rem}
-.pill{background:var(--tag);border-radius:100px;padding:.28rem .75rem;font-size:.73rem;font-weight:500}
+.pill{background:var(--tag);border-radius:100px;padding:.28rem .75rem;font-size:.73rem;font-weight:500;transition:background .3s}
 .pill.a{background:var(--accent-light);color:var(--accent)}
+
+/* ── SECTIONS ── */
 section{padding:6rem 4rem}
 .inner{max-width:1100px;margin:0 auto}
 .sec-label{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:.8rem}
 .sec-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.2;margin-bottom:1rem}
 .sec-sub{font-size:1rem;color:var(--muted);max-width:560px;line-height:1.7}
 .divider{border:none;border-top:1px solid var(--border)}
-#work{background:#fff}
+
+/* ── WORK ── */
+#work{background:var(--white)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
-.proj-card{background:var(--cream);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .2s,box-shadow .2s;text-decoration:none;color:inherit;display:block}
-.proj-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.proj-card{background:var(--cream);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .2s,box-shadow .2s,background .3s;text-decoration:none;color:inherit;display:block}
+.proj-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.12)}
 .thumb{height:170px;display:flex;align-items:center;justify-content:center;font-size:2.5rem}
 .t1{background:linear-gradient(135deg,#F4E8DF,#E8D5C4)}
 .t2{background:linear-gradient(135deg,#DDE8F0,#C4D8E8)}
@@ -59,37 +89,55 @@ section{padding:6rem 4rem}
 .ptitle{font-family:'DM Serif Display',serif;font-size:1.12rem;margin-bottom:.5rem}
 .pdesc{font-size:.87rem;color:var(--muted);line-height:1.65}
 .read-more{font-size:.8rem;color:var(--accent);font-weight:600;margin-top:.8rem;display:inline-block}
+
+/* ── EXPERIENCE (collapsible) ── */
 .timeline{margin-top:3rem}
-.titem{display:grid;grid-template-columns:200px 1fr;gap:2rem;padding:2.5rem 0;border-top:1px solid var(--border)}
+.titem{border-top:1px solid var(--border)}
 .titem:last-child{border-bottom:1px solid var(--border)}
+
+.titem-header{display:grid;grid-template-columns:200px 1fr auto;gap:2rem;padding:1.8rem 0;cursor:pointer;align-items:center;user-select:none}
+.titem-header:hover .trole{color:var(--accent)}
 .tdate{font-size:.78rem;color:var(--muted)}
 .tco{font-size:.85rem;font-weight:600;color:var(--accent);margin-top:.3rem}
-.trole{font-family:'DM Serif Display',serif;font-size:1.15rem;margin-bottom:.8rem}
+.trole{font-family:'DM Serif Display',serif;font-size:1.15rem;transition:color .2s}
+.tchevron{font-size:.9rem;color:var(--muted);transition:transform .3s;flex-shrink:0}
+.titem.open .tchevron{transform:rotate(180deg)}
+
+.titem-body{overflow:hidden;max-height:0;transition:max-height .35s ease,padding .35s ease}
+.titem.open .titem-body{max-height:400px}
+.titem-body-inner{padding:0 0 1.8rem 0;padding-left:calc(200px + 2rem)}
+
 .tbulls{list-style:none;display:flex;flex-direction:column;gap:.55rem}
 .tbulls li{font-size:.87rem;color:var(--muted);line-height:1.65;padding-left:1.2rem;position:relative}
 .tbulls li::before{content:"→";position:absolute;left:0;color:var(--accent);font-size:.75rem}
-#skills{background:#fff}
+
+/* ── SKILLS ── */
+#skills{background:var(--white)}
 .sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.5rem;margin-top:3rem}
-.scard{background:var(--cream);border:1px solid var(--border);border-radius:14px;padding:1.6rem}
+.scard{background:var(--cream);border:1px solid var(--border);border-radius:14px;padding:1.6rem;transition:background .3s,border-color .3s}
 .scard-icon{font-size:1.5rem;margin-bottom:.8rem}
 .scard-title{font-weight:600;font-size:.93rem;margin-bottom:1rem}
 .stags{display:flex;flex-wrap:wrap;gap:.45rem}
-.stag{background:var(--tag);border-radius:100px;padding:.28rem .72rem;font-size:.73rem}
+.stag{background:var(--tag);border-radius:100px;padding:.28rem .72rem;font-size:.73rem;transition:background .3s}
+
+/* ── ABOUT ── */
 .agrid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:3rem;align-items:start}
 .atext p{font-size:.97rem;color:var(--muted);line-height:1.8;margin-bottom:1.1rem}
 .atext p strong{color:var(--ink)}
-.edu{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.3rem 1.5rem;margin-top:.75rem}
+.edu{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.3rem 1.5rem;margin-top:.75rem;transition:background .3s,border-color .3s}
 .edu-s{font-weight:600;font-size:.9rem}
 .edu-d{font-size:.84rem;color:var(--muted);margin-top:.2rem}
 .edu-n{font-size:.78rem;color:var(--accent);margin-top:.4rem}
-.quote-block{background:var(--accent-light);border-radius:20px;padding:2.5rem}
+.quote-block{background:var(--accent-light);border-radius:20px;padding:2.5rem;transition:background .3s}
 .quote-block blockquote{font-family:'DM Serif Display',serif;font-size:1.35rem;font-style:italic;line-height:1.5}
 .quote-block cite{display:block;margin-top:1rem;font-size:.82rem;color:var(--muted);font-style:normal}
 .fun-items{margin-top:1.8rem;display:flex;flex-direction:column;gap:.9rem}
-.fun-item{display:flex;align-items:center;gap:.75rem;font-size:.88rem;color:#5a4a3a}
-#contact{background:var(--ink);color:var(--cream)}
+.fun-item{display:flex;align-items:center;gap:.75rem;font-size:.88rem;color:var(--muted)}
+
+/* ── CONTACT ── */
+#contact{background:var(--contact-bg);color:var(--contact-color);transition:background .3s}
 #contact .sec-label{color:var(--accent)}
-#contact .sec-title{color:var(--cream)}
+#contact .sec-title{color:var(--contact-color)}
 #contact .sec-sub{color:rgba(250,248,244,.6)}
 .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem}
 .badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(196,107,60,.2);color:var(--accent);border:1px solid rgba(196,107,60,.3);border-radius:100px;padding:.4rem 1rem;font-size:.78rem;font-weight:600;margin-bottom:1.5rem}
@@ -100,21 +148,40 @@ section{padding:6rem 4rem}
 .clink:hover{color:var(--accent)}
 .cicon{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
 .ctext{font-size:.88rem;color:rgba(250,248,244,.5);line-height:1.8}
-footer{text-align:center;padding:1.8rem 4rem;background:#111;color:rgba(255,255,255,.3);font-size:.78rem}
-@media(max-width:900px){nav{padding:1rem 1.5rem}.nav-links{gap:1.5rem}.hero{flex-direction:column;padding:7rem 1.5rem 3rem;gap:2.5rem}.hero-cards{flex:none;width:100%}section{padding:4rem 1.5rem}.titem{grid-template-columns:1fr;gap:.4rem}.agrid{grid-template-columns:1fr}.cgrid{grid-template-columns:1fr}}
+footer{text-align:center;padding:1.8rem 4rem;background:var(--footer-bg);color:rgba(255,255,255,.3);font-size:.78rem;transition:background .3s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{gap:1.5rem}
+  .hero{flex-direction:column;padding:7rem 1.5rem 3rem;gap:2.5rem}
+  .hero-cards{flex:none;width:100%}
+  section{padding:4rem 1.5rem}
+  .titem-header{grid-template-columns:1fr auto;gap:1rem}
+  .titem-header .tmeta{display:none}
+  .titem-body-inner{padding-left:0}
+  .agrid{grid-template-columns:1fr}
+  .cgrid{grid-template-columns:1fr}
+}
 @media(max-width:600px){.nav-links{display:none}}
 </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html" class="nav-logo">Gless Valera</a>
-  <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <span class="icon">🌙</span><span class="label">Dark</span>
+    </button>
+  </div>
 </nav>
 
 <div class="hero">
@@ -136,7 +203,7 @@ footer{text-align:center;padding:1.8rem 4rem;background:#111;color:rgba(255,255,
     <div class="card"><div class="card-label">Currently at</div><div class="card-val">Sum Digital · Ad Operations Coordinator & Designer</div></div>
     <div class="card"><div class="card-label">Location</div><div class="card-val">Laguna Niguel, CA</div></div>
     <div class="card"><div class="card-label">Core Expertise</div><div class="pills"><span class="pill a">UX Research</span><span class="pill a">Usability Testing</span><span class="pill">Content Design</span><span class="pill">Paid Social</span></div></div>
-    <div class="card"><div class="card-label">Tools</div><div class="pills"><span class="pill">Figma</span><span <span class="pill">PhotoShop</span><span class="pill">Miro</span><span class="pill">Qualtrics</span><span class="pill">Notion</span><span class="pill">Canva</span></div></div>
+    <div class="card"><div class="card-label">Tools</div><div class="pills"><span class="pill">Figma</span><span class="pill">Photoshop</span><span class="pill">Miro</span><span class="pill">Qualtrics</span><span class="pill">Notion</span><span class="pill">Canva</span></div></div>
   </div>
 </div>
 
@@ -194,51 +261,81 @@ footer{text-align:center;padding:1.8rem 4rem;background:#111;color:rgba(255,255,
   <div class="inner">
     <p class="sec-label">Career</p>
     <h2 class="sec-title">Where I've worked</h2>
+    <p class="sec-sub" style="margin-bottom:0">Click any role to expand details.</p>
     <div class="timeline">
+
       <div class="titem">
-        <div><div class="tdate">Sept 2025 – Feb 2026</div><div class="tco">Sum Digital</div></div>
-        <div>
+        <div class="titem-header" onclick="toggleItem(this)">
+          <div class="tmeta"><div class="tdate">Sept 2025 – Feb 2026</div><div class="tco">Sum Digital</div></div>
           <div class="trole">Ad Operations Coordinator & Graphic Designer</div>
-          <ul class="tbulls">
-            <li>Launched and managed 500+ paid social ads across Meta, TikTok, and Pinterest for a high-volume DTC brand, including ~200 whitelist ads.</li>
-            <li>Designed static creatives that became a top-spending variant — capturing 38% of total campaign delivery within 14 days.</li>
-            <li>Analyzed ROAS, CPC, and spend concentration to guide the development of high-performing ad variations.</li>
-          </ul>
+          <span class="tchevron">▼</span>
+        </div>
+        <div class="titem-body">
+          <div class="titem-body-inner">
+            <div style="font-size:.78rem;color:var(--muted);margin-bottom:.8rem">Sum Digital · Sept 2025 – Feb 2026</div>
+            <ul class="tbulls">
+              <li>Launched and managed 500+ paid social ads across Meta, TikTok, and Pinterest for a high-volume DTC brand, including ~200 whitelist ads.</li>
+              <li>Designed static creatives that became a top-spending variant — capturing 38% of total campaign delivery within 14 days.</li>
+              <li>Analyzed ROAS, CPC, and spend concentration to guide the development of high-performing ad variations.</li>
+            </ul>
+          </div>
         </div>
       </div>
+
       <div class="titem">
-        <div><div class="tdate">Dec 2024 – Sept 2025</div><div class="tco">Congressional Communities</div></div>
-        <div>
+        <div class="titem-header" onclick="toggleItem(this)">
+          <div class="tmeta"><div class="tdate">Dec 2024 – Sept 2025</div><div class="tco">Congressional Communities</div></div>
           <div class="trole">Administrative & UX Assistant</div>
-          <ul class="tbulls">
-            <li>Conducted UX research and developed wireframes and mockups for a new company website through feedback sessions and content audits.</li>
-            <li>Wrote research-informed newsletter articles, leveraging AI tools (ChatGPT, Gemini) for content recommendations and workflow optimization.</li>
-            <li>Built systems for client outreach and project tracking, streamlining cross-team communication.</li>
-          </ul>
+          <span class="tchevron">▼</span>
+        </div>
+        <div class="titem-body">
+          <div class="titem-body-inner">
+            <div style="font-size:.78rem;color:var(--muted);margin-bottom:.8rem">Congressional Communities · Dec 2024 – Sept 2025</div>
+            <ul class="tbulls">
+              <li>Conducted UX research and developed wireframes and mockups for a new company website through feedback sessions and content audits.</li>
+              <li>Wrote research-informed newsletter articles, leveraging AI tools (ChatGPT, Gemini) for content recommendations and workflow optimization.</li>
+              <li>Built systems for client outreach and project tracking, streamlining cross-team communication.</li>
+            </ul>
+          </div>
         </div>
       </div>
+
       <div class="titem">
-        <div><div class="tdate">Dec 2023 – Dec 2024</div><div class="tco">Tech Fleet</div></div>
-        <div>
+        <div class="titem-header" onclick="toggleItem(this)">
+          <div class="tmeta"><div class="tdate">Dec 2023 – Dec 2024</div><div class="tco">Tech Fleet</div></div>
           <div class="trole">Lead UX Researcher</div>
-          <ul class="tbulls">
-            <li>Shaped 5 key product features and drove a 20% increase in engagement through an inclusive LGBTQ+ mentorship platform.</li>
-            <li>Improved onboarding efficiency by 30% via usability tests, surveys, and heuristic evaluations for nonprofit MVP development.</li>
-            <li>Synthesized 10+ actionable reports that reduced user-reported issues by 20% and increased stakeholder engagement by 40%.</li>
-          </ul>
+          <span class="tchevron">▼</span>
+        </div>
+        <div class="titem-body">
+          <div class="titem-body-inner">
+            <div style="font-size:.78rem;color:var(--muted);margin-bottom:.8rem">Tech Fleet · Dec 2023 – Dec 2024</div>
+            <ul class="tbulls">
+              <li>Shaped 5 key product features and drove a 20% increase in engagement through an inclusive LGBTQ+ mentorship platform.</li>
+              <li>Improved onboarding efficiency by 30% via usability tests, surveys, and heuristic evaluations for nonprofit MVP development.</li>
+              <li>Synthesized 10+ actionable reports that reduced user-reported issues by 20% and increased stakeholder engagement by 40%.</li>
+            </ul>
+          </div>
         </div>
       </div>
+
       <div class="titem">
-        <div><div class="tdate">Sept – Dec 2023</div><div class="tco">Tech Fleet</div></div>
-        <div>
+        <div class="titem-header" onclick="toggleItem(this)">
+          <div class="tmeta"><div class="tdate">Sept – Dec 2023</div><div class="tco">Tech Fleet</div></div>
           <div class="trole">UX Writer / Content Designer</div>
-          <ul class="tbulls">
-            <li>Improved content accessibility by 25% through style guides and audits for a nonprofit empowering Black and Brown homeschoolers.</li>
-            <li>Formulated content strategies through cross-functional collaboration, turning business goals into positive user experiences.</li>
-            <li>Defined brand archetypes to guide product storytelling and shape a cohesive, resonant brand voice.</li>
-          </ul>
+          <span class="tchevron">▼</span>
+        </div>
+        <div class="titem-body">
+          <div class="titem-body-inner">
+            <div style="font-size:.78rem;color:var(--muted);margin-bottom:.8rem">Tech Fleet · Sept – Dec 2023</div>
+            <ul class="tbulls">
+              <li>Improved content accessibility by 25% through style guides and audits for a nonprofit empowering Black and Brown homeschoolers.</li>
+              <li>Formulated content strategies through cross-functional collaboration, turning business goals into positive user experiences.</li>
+              <li>Defined brand archetypes to guide product storytelling and shape a cohesive, resonant brand voice.</li>
+            </ul>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -301,7 +398,7 @@ footer{text-align:center;padding:1.8rem 4rem;background:#111;color:rgba(255,255,
       <div>
         <div class="badge"><span class="dot"></span>Available for new roles</div>
         <div class="clinks">
-          <a href="mailto:valera.gless@gmail.com" class="clink"><span class="cicon">✉️</span>valera.gless@gmail.com</a>
+          <a href="/cdn-cgi/l/email-protection#2751464b42554609404b42545467404a464e4b0944484a" class="clink"><span class="cicon">✉️</span><span class="__cf_email__" data-cfemail="8afcebe6eff8eba4ede6eff9f9caede7ebe3e6a4e9e5e7">[email&#160;protected]</span></a>
           <a href="tel:9497933888" class="clink"><span class="cicon">📱</span>(949) 793-3888</a>
           <a href="https://www.linkedin.com/in/glessvalera/" target="_blank" class="clink"><span class="cicon">💼</span>linkedin.com/in/glessvalera</a>
         </div>
@@ -312,5 +409,41 @@ footer{text-align:center;padding:1.8rem 4rem;background:#111;color:rgba(255,255,
 </section>
 
 <footer>© 2026 Julianne Gless Valera · Laguna Niguel, CA</footer>
+
+<script>
+  // ── COLLAPSIBLE EXPERIENCE ──
+  window.toggleItem = function(header) {
+    const item = header.parentElement;
+    item.classList.toggle('open');
+  }
+
+  // ── DARK / LIGHT MODE TOGGLE ──
+  window.toggleTheme = function() {
+    const body = document.body;
+    const btn = document.querySelector('.theme-toggle');
+    const icon = btn.querySelector('.icon');
+    const label = btn.querySelector('.label');
+    body.classList.toggle('dark');
+    if (body.classList.contains('dark')) {
+      icon.textContent = '☀️';
+      label.textContent = 'Light';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      icon.textContent = '🌙';
+      label.textContent = 'Dark';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
+  // Restore saved theme on page load
+  (function() {
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark');
+      const btn = document.querySelector('.theme-toggle');
+      btn.querySelector('.icon').textContent = '☀️';
+      btn.querySelector('.label').textContent = 'Light';
+    }
+  })();
+</script>
 </body>
 </html>
